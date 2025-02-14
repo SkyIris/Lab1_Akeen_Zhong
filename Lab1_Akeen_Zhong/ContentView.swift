@@ -8,22 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    //@State private var currentDate = Date.now
+
         
     var timer = Timer.publish(every: 7, on: .main, in: .common).autoconnect()
-    /*@ObservedObject var stopWatch = stopwatch()
-    class stopwatch: ObservableObject{
-        @Published var counter: Int = 0
-        var timer = Timer()
-        func start(){
-            self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in self.counter+=1}
-            
-        }
-        func reset(){
-            self.counter = 0
-        }
-    }*/
-    
+
     @State var showCheck = false
     @State var showX = false
     @State private var showAlert = false
@@ -39,7 +27,7 @@ struct ContentView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
             newQuestion()
         }
-        //display asset, return
+
     }
     
     func correct(){
@@ -58,7 +46,7 @@ struct ContentView: View {
             if((score+wrong) == 10)
             {
                 Text("").alert(isPresented: $showAlert, content: {
-                    Alert(title: Text("Your score is \(score)/timer\(wrong)"))
+                    Alert(title: Text("Your score is \(score)/\(wrong)"))
                 })
             }
             if(showX)
@@ -70,11 +58,11 @@ struct ContentView: View {
             {
                 Image("greencheck.svg")
             }
-            Text("Prime number guessing game")
+            Text("Prime number guessing game").font(.system(size:28))
             Text("Current number: \(number)").onReceive(timer){
                 input in self.timeOut()
 
-            }
+            }.font(.system(size:28))
             Spacer()
             ZStack{
                 Color.green
@@ -86,7 +74,7 @@ struct ContentView: View {
                     else{
                         timeOut()
                     }
-                    newQuestion()
+                    //newQuestion()
                 }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
@@ -102,7 +90,7 @@ struct ContentView: View {
                         correct()
                         
                     }
-                    newQuestion()
+                    //newQuestion()
                 }.buttonStyle(.borderedProminent)
                     .controlSize(.large)
             }
