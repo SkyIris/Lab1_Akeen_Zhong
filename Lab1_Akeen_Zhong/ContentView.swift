@@ -13,14 +13,13 @@ struct ContentView: View {
     @State var number = Int.random(in: 1..<100)
     let primes = [2,3,5,7,11,13,17,19,23,29,31,41,43,53,59,61,67,71,73,79,83,89,97]
     var body: some View {
-        VStack (spacing:20) {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
+        VStack (spacing:50) {
+            Spacer()
+            Text("Prime number guessing game")
             Text("Current number: \(number)")
             Spacer()
             ZStack{
-                Color.black
+                Color.green
                 Button("Prime"){
                     if (primes.contains(number)){
                         score+=1
@@ -28,9 +27,9 @@ struct ContentView: View {
                     else{
                         wrong+=1
                     }
-                }
+                }.buttonStyle(.borderedProminent)
+                    .controlSize(.large)
             }
-            Spacer()
             ZStack{
                 Color.red
                 Button("Not prime"){
@@ -40,7 +39,8 @@ struct ContentView: View {
                     else{
                         score+=1
                     }
-                }
+                }.buttonStyle(.borderedProminent)
+                    .controlSize(.large)
             }
         }
         Spacer()
