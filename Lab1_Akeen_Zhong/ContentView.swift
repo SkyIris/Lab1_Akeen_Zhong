@@ -8,8 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var currentDate = Date.now
-    let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    //@State private var currentDate = Date.now
+        
+    var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    /*@ObservedObject var stopWatch = stopwatch()
+    class stopwatch: ObservableObject{
+        @Published var counter: Int = 0
+        var timer = Timer()
+        func start(){
+            self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in self.counter+=1}
+            
+        }
+        func reset(){
+            self.counter = 0
+        }
+    }*/
     @State private var showAlert = false
     @State var score = 0
     @State var wrong = 0
@@ -76,6 +89,7 @@ struct ContentView: View {
     }
     func newQuestion(){
         number = Int.random(in: 1..<100)
+        var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     }
 }
 
