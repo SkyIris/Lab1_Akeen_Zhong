@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var currentDate = Date.now
+    let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @State private var showAlert = false
     @State var score = 0
     @State var wrong = 0
@@ -30,7 +32,9 @@ struct ContentView: View {
         VStack (spacing:50) {
             Spacer()
             Text("Prime number guessing game")
-            Text("Current number: \(number)")
+            Text("Current number: \(number)").onReceive(timer){
+                input in self.newQuestion()
+            }
             Spacer()
             ZStack{
                 Color.green
