@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showAlert = false
     @State var score = 0
     @State var wrong = 0
     @State var number = Int.random(in: 1..<100)
@@ -21,6 +22,7 @@ struct ContentView: View {
             ZStack{
                 Color.green
                 Button("Prime"){
+                    showAlert = true
                     if (primes.contains(number)){
                         score+=1
                     }
@@ -29,6 +31,10 @@ struct ContentView: View {
                     }
                 }.buttonStyle(.borderedProminent)
                     .controlSize(.large)
+                    .alert("You clicked prime", isPresented: $showAlert){
+                        Button("ok"){}
+                    }
+                
             }
             ZStack{
                 Color.red
