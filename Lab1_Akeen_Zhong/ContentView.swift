@@ -75,7 +75,7 @@ struct ContentView: View {
                     else if(showX == false && showCheck == false){
                         timeOut()
                     }
-                    //newQuestion()
+                    
                 }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
@@ -92,7 +92,7 @@ struct ContentView: View {
                         correct()
                         
                     }
-                    //newQuestion()
+                    
                 }.buttonStyle(.borderedProminent)
                     .controlSize(.large)
             }
