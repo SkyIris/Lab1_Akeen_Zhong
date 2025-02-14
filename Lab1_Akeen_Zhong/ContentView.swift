@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     //@State private var currentDate = Date.now
         
-    var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+    var timer = Timer.publish(every: 7, on: .main, in: .common).autoconnect()
     /*@ObservedObject var stopWatch = stopwatch()
     class stopwatch: ObservableObject{
         @Published var counter: Int = 0
@@ -32,14 +32,22 @@ struct ContentView: View {
     @State var number = Int.random(in: 1..<100)
     @State private var primes = [2,3,5,7,11,13,17,19,23,29,31,41,43,53,59,61,67,71,73,79,83,89,97]
     
-    func correctAnswer(){
-        score+=1
+    
+    func timeOut(){
+        wrong+=1
+        showX = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+            newQuestion()
+        }
         //display asset, return
     }
     
-    func wrongAnswer(){
-        wrong+=1
-        //display asset, return
+    func correct(){
+        score+=1
+        showCheck = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+            newQuestion()
+        }
     }
     
 
@@ -50,7 +58,7 @@ struct ContentView: View {
             if((score+wrong) == 10)
             {
                 Text("").alert(isPresented: $showAlert, content: {
-                    Alert(title: Text("Your score is \(score)/\(wrong)"))
+                    Alert(title: Text("Your score is \(score)/timer\(wrong)"))
                 })
             }
             if(showX)
@@ -64,7 +72,7 @@ struct ContentView: View {
             }
             Text("Prime number guessing game")
             Text("Current number: \(number)").onReceive(timer){
-                input in self.newQuestion()
+                input in self.timeOut()
 
             }
             Spacer()
@@ -73,14 +81,12 @@ struct ContentView: View {
                 Button("Prime"){
                     showAlert = true
                     if (primes.contains(number)){
-                        score+=1
-                        showCheck = true
+                        correct()
                     }
                     else{
-                        wrong+=1
-                        showX = true
+                        timeOut()
                     }
-                    //newQuestion()
+                    newQuestion()
                 }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
@@ -90,15 +96,13 @@ struct ContentView: View {
                 Color.red
                 Button("Not prime"){
                     if (primes.contains(number)){
-                        wrong+=1
-                        showX = true
+                        timeOut()
                     }
                     else{
-                        score+=1
-                        showCheck = true
+                        correct()
                         
                     }
-                    //newQuestion()
+                    newQuestion()
                 }.buttonStyle(.borderedProminent)
                     .controlSize(.large)
             }
