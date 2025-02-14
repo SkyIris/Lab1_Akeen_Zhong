@@ -23,6 +23,8 @@ struct ContentView: View {
             self.counter = 0
         }
     }*/
+    @State var showCheck = false
+    @State var showX = false
     @State private var showAlert = false
     @State var score = 0
     @State var wrong = 0
@@ -44,9 +46,19 @@ struct ContentView: View {
     var body: some View {
         VStack (spacing:50) {
             Spacer()
+            if(showX)
+            {
+                Image("redx.svg")
+                }
+            
+            if(showCheck)
+            {
+                Image("greencheck.svg")
+            }
             Text("Prime number guessing game")
             Text("Current number: \(number)").onReceive(timer){
                 input in self.newQuestion()
+
             }
             Spacer()
             ZStack{
@@ -55,11 +67,13 @@ struct ContentView: View {
                     showAlert = true
                     if (primes.contains(number)){
                         score+=1
+                        showCheck = true
                     }
                     else{
                         wrong+=1
+                        showX = true
                     }
-                    newQuestion()
+                    //newQuestion()
                 }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
@@ -70,11 +84,14 @@ struct ContentView: View {
                 Button("Not prime"){
                     if (primes.contains(number)){
                         wrong+=1
+                        showX = true
                     }
                     else{
                         score+=1
+                        showCheck = true
+                        
                     }
-                    newQuestion()
+                    //newQuestion()
                 }.buttonStyle(.borderedProminent)
                     .controlSize(.large)
             }
@@ -85,11 +102,13 @@ struct ContentView: View {
         VStack(alignment: .leading){
             Text("Score: \(score) - \(wrong)")
         }
-        .padding()
+    
     }
+    
     func newQuestion(){
+        showX = false
+        showCheck = false
         number = Int.random(in: 1..<100)
-        var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     }
 }
 
