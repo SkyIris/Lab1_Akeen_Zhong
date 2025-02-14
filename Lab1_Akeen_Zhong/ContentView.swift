@@ -13,13 +13,13 @@ struct ContentView: View {
     @State var number = Int.random(in: 1..<100)
     let primes = [2,3,5,7,11,13,17,19,23,29,31,41,43,53,59,61,67,71,73,79,83,89,97]
     var body: some View {
-        VStack {
+        VStack (spacing:20) {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Current number: \(number)")
-            
-            Button("Prime: \(score)"){
+            Spacer()
+            Button("Prime"){
                 if (primes.contains(number)){
                     score+=1
                 }
@@ -28,13 +28,20 @@ struct ContentView: View {
                 }
             }
             
-            Button("Not prime:  \(score)"){              if (primes.contains(number)){
+            Button("Not prime"){
+                if (primes.contains(number)){
                 wrong+=1
             }
                 else{
                     score+=1
                 }
             }
+        }
+        Spacer()
+        Spacer()
+        
+        VStack(alignment: .leading){
+            Text("Score: \(score) - \(wrong)")
         }
         .padding()
     }
