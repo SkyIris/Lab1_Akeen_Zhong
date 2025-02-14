@@ -14,6 +14,7 @@ struct ContentView: View {
 
     @State var showCheck = false
     @State var showX = false
+    
     @State private var showAlert = false
     @State var score = 0
     @State var wrong = 0
@@ -80,6 +81,7 @@ struct ContentView: View {
                     .controlSize(.large)
                 
             }
+            
             ZStack{
                 Color.red
                 Button("Not prime"){
@@ -94,6 +96,7 @@ struct ContentView: View {
                 }.buttonStyle(.borderedProminent)
                     .controlSize(.large)
             }
+            
         }
         Spacer()
         Spacer()
