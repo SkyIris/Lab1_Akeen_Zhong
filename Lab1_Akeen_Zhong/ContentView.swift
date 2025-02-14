@@ -23,6 +23,7 @@ struct ContentView: View {
             self.counter = 0
         }
     }*/
+    
     @State var showCheck = false
     @State var showX = false
     @State private var showAlert = false
@@ -46,6 +47,12 @@ struct ContentView: View {
     var body: some View {
         VStack (spacing:50) {
             Spacer()
+            if((score+wrong) == 10)
+            {
+                Text("").alert(isPresented: $showAlert, content: {
+                    Alert(title: Text("Your score is \(score)/\(wrong)"))
+                })
+            }
             if(showX)
             {
                 Image("redx.svg")
