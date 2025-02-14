@@ -52,12 +52,12 @@ struct ContentView: View {
             }
             if(showX)
             {
-                Image("redx.svg")
+                Image("redx")
                 }
             
             if(showCheck)
             {
-                Image("greencheck.svg")
+                Image("greencheck")
             }
             Text("Prime number guessing game").font(.system(size:28))
             Text("Current number: \(number)").onReceive(timer){
@@ -69,10 +69,10 @@ struct ContentView: View {
                 Color.green
                 Button("Prime"){
                     showAlert = true
-                    if (primes.contains(number)){
+                    if (primes.contains(number) && showX == false && showCheck == false){
                         correct()
                     }
-                    else{
+                    else if(showX == false && showCheck == false){
                         timeOut()
                     }
                     //newQuestion()
@@ -85,10 +85,10 @@ struct ContentView: View {
             ZStack{
                 Color.red
                 Button("Not prime"){
-                    if (primes.contains(number)){
+                    if (primes.contains(number) && showX == false && showCheck == false){
                         timeOut()
                     }
-                    else{
+                    else if(showX == false && showCheck == false){
                         correct()
                         
                     }
