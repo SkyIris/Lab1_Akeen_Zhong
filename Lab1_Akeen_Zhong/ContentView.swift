@@ -19,21 +19,27 @@ struct ContentView: View {
                 .foregroundStyle(.tint)
             Text("Current number: \(number)")
             Spacer()
-            Button("Prime"){
-                if (primes.contains(number)){
-                    score+=1
-                }
-                else{
-                    wrong+=1
+            ZStack{
+                Color.black
+                Button("Prime"){
+                    if (primes.contains(number)){
+                        score+=1
+                    }
+                    else{
+                        wrong+=1
+                    }
                 }
             }
-            
-            Button("Not prime"){
-                if (primes.contains(number)){
-                wrong+=1
-            }
-                else{
-                    score+=1
+            Spacer()
+            ZStack{
+                Color.red
+                Button("Not prime"){
+                    if (primes.contains(number)){
+                        wrong+=1
+                    }
+                    else{
+                        score+=1
+                    }
                 }
             }
         }
