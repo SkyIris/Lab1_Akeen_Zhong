@@ -12,7 +12,20 @@ struct ContentView: View {
     @State var score = 0
     @State var wrong = 0
     @State var number = Int.random(in: 1..<100)
-    let primes = [2,3,5,7,11,13,17,19,23,29,31,41,43,53,59,61,67,71,73,79,83,89,97]
+    @State private var primes = [2,3,5,7,11,13,17,19,23,29,31,41,43,53,59,61,67,71,73,79,83,89,97]
+    
+    func correctAnswer(){
+        score+=1
+        //display asset, return
+    }
+    
+    func wrongAnswer(){
+        wrong+=1
+        //display asset, return
+    }
+    
+
+    
     var body: some View {
         VStack (spacing:50) {
             Spacer()
@@ -29,11 +42,10 @@ struct ContentView: View {
                     else{
                         wrong+=1
                     }
-                }.buttonStyle(.borderedProminent)
+                    newQuestion()
+                }
+                    .buttonStyle(.borderedProminent)
                     .controlSize(.large)
-                    .alert("You clicked prime", isPresented: $showAlert){
-                        Button("ok"){}
-                    }
                 
             }
             ZStack{
@@ -45,6 +57,7 @@ struct ContentView: View {
                     else{
                         score+=1
                     }
+                    newQuestion()
                 }.buttonStyle(.borderedProminent)
                     .controlSize(.large)
             }
@@ -57,7 +70,9 @@ struct ContentView: View {
         }
         .padding()
     }
-    
+    func newQuestion(){
+        number = Int.random(in: 1..<100)
+    }
 }
 
 #Preview {
